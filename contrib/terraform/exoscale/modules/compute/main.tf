@@ -22,6 +22,15 @@ resource "exoscale_security_group" "k8s" {
   description = "Kubernetes"
 }
 
+resource "exoscale_security_group_rule" "k8s_ssh" {
+  security_group_id = "${exoscale_security_group.k8s.id}"
+  cidr = "0.0.0.0/0"
+  start_port = "22"
+  end_port = "22"
+  type = "INGRESS"
+  protocol = "TCP"
+}
+
 resource "exoscale_security_group_rule" "k8s_TCP" {
   security_group_id = "${exoscale_security_group.k8s.id}"
   user_security_group_id = "${exoscale_security_group.k8s.id}"

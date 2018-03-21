@@ -335,6 +335,7 @@ def exoscale_host(resource, module_name):
         'ansible_ssh_host': raw_attrs['ip_address'],
         'ansible_ssh_port': 22,
         'ansible_ssh_user': raw_attrs['username'],
+        'ansible_python_interpreter': raw_attrs.get('tags.python_bin', 'python3'),
         'public_ipv4': raw_attrs['ip_address'],
         'publicly_routable': True,
         'provider': 'exoscale',
