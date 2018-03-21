@@ -318,6 +318,32 @@ def openstack_floating_ips(resource):
     raw_attrs = resource['primary']['attributes']
     return raw_attrs['instance_id'], raw_attrs['floating_ip']
 
+@parses('exoscale_compute')
+def exoscale_host(resource, module_name):
+    raw_attrs = resource['primary']['attributes']
+    name = raw_attrs['name']
+
+    attrs = {
+        'id': raw_attrs['id'],
+        'name': raw_attrs['name'],
+        'display_name': raw_attrs['display_name'],
+        'zone': raw_attrs['zone'],
+        'template': raw_attrs['template'],
+        'size': raw_attrs['size'],
+        'disk_size': raw_attrs['disk_size'],
+        'ip_address': raw_attrs['ip_address'],
+        'ansible_ssh_host': raw_attrs['ip_address'],
+        'ansible_ssh_port': 22,
+        'ansible_ssh_user': raw_attrs['username'],
+        'public_ipv4': raw_attrs['ip_address'],
+        'publicly_routable': True,
+        'provider': 'exoscale',
+    }
+
+    groups = raw_attrs.get('tags.kubespray_groups', '').split(',')
+
+    return name, attrs, groups
+
 @parses('openstack_compute_instance_v2')
 @calculate_mantl_vars
 def openstack_host(resource, module_name):
