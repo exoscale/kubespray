@@ -102,6 +102,14 @@ $ terraform destroy ../../contrib/terraform/exoscale
 
 ## Ansible
 
+### Setup
+
+Ansible is a Python package and the current setup requires also netaddr to be present.
+
+```console
+$ pip install -U ansible netaddr
+```
+
 ### SSH
 
 ...
