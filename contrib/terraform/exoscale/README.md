@@ -77,21 +77,27 @@ secret = "..."
 
 ### Initialization
 
+The Exoscale Terraform provider isn't part of the official list, as of yet.
+
 ```console
-$ terraform init
+$ export VERSION=0.9.14
+$ mkdir -p .terraform/plugins/linux_amd64
+$ wget https://github.com/exoscale/terraform-provider-exoscale/releases/download/v${VERSION}/terraform-provider-exoscale_v${VERSION}_x1 -O .terraform/plugins/linux_amd64/
+$ chmod +x .terraform/plugins/linux_amd64/terraform-provider-exoscale_v${VERSION}_x1
+$ terraform init ../../contrib/terraform/exoscale
 ```
 
 ### Provisioning the cluster
 
 ```console
-$ terraform apply -var-file=cluster.tf
+$ terraform apply ../../contrib/terraform/exoscale
 ```
 
 ### Destroying the cluster
 
 
 ```console
-$ terraform destroy -var-file=cluster.tf
+$ terraform destroy ../../contrib/terraform/exoscale
 ```
 
 ## Ansible
@@ -127,4 +133,21 @@ example-k8s-master-ne-1 | SUCCESS => {
         "changed": false,
                 "ping": "pong"
 }
+```
+
+## Configure cluster variables
+
+Edit `inventory/$CLUSTER/group_vars/all.yml`.
+
+- `boostrap_os`: `ubuntu`
+
+Edit `inventory/$CLUSTER/group_vars/k8s-cluster.yml`:
+
+- `kube_network_plugin`: `flannel`
+- `resolvconf_mode`: `host_resolvconf`
+
+## Deploy Kubernetes
+
+```console
+$ ansible-playbook --become -i inventory/$CLUSTER/hosts cluster.yml
 ```
