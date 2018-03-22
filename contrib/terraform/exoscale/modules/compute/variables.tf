@@ -1,5 +1,7 @@
 variable "cluster_name" {}
 
+variable "number_of_bastions" {}
+
 variable "number_of_k8s_masters" {}
 
 variable "number_of_k8s_masters_no_etcd" {}

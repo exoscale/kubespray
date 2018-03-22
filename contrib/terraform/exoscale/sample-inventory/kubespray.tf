@@ -6,6 +6,10 @@ variable "cluster_name" {
   default = "example"
 }
 
+variable "number_of_bastions" {
+  default = 1
+}
+
 variable "number_of_k8s_masters" {
   default = 2
 }
@@ -48,6 +52,7 @@ module "compute" {
   source = "../../contrib/terraform/exoscale/modules/compute"
 
   cluster_name                                 = "${var.cluster_name}"
+  number_of_bastions                           = "${var.number_of_bastions}"
   number_of_k8s_masters                        = "${var.number_of_k8s_masters}"
   number_of_k8s_masters_no_etcd                = "${var.number_of_k8s_masters_no_etcd}"
   number_of_etcd                               = "${var.number_of_etcd}"
