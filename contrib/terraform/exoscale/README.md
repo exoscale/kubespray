@@ -84,20 +84,20 @@ $ export VERSION=0.9.14
 $ mkdir -p .terraform/plugins/linux_amd64
 $ wget https://github.com/exoscale/terraform-provider-exoscale/releases/download/v${VERSION}/terraform-provider-exoscale_v${VERSION}_x1 -O .terraform/plugins/linux_amd64/
 $ chmod +x .terraform/plugins/linux_amd64/terraform-provider-exoscale_v${VERSION}_x1
-$ terraform init ../../contrib/terraform/exoscale
+$ terraform init
 ```
 
 ### Provisioning the cluster
 
 ```console
-$ terraform apply ../../contrib/terraform/exoscale
+$ terraform apply
 ```
 
 ### Destroying the cluster
 
 
 ```console
-$ terraform destroy ../../contrib/terraform/exoscale
+$ terraform destroy
 ```
 
 ## Ansible
@@ -141,6 +141,7 @@ example-k8s-master-ne-1 | SUCCESS => {
         "changed": false,
                 "ping": "pong"
 }
+...
 ```
 
 ## Configure cluster variables
@@ -151,7 +152,6 @@ Edit `inventory/$CLUSTER/group_vars/all.yml`.
 
 Edit `inventory/$CLUSTER/group_vars/k8s-cluster.yml`:
 
-- `kube_network_plugin`: `flannel`
 - `resolvconf_mode`: `host_resolvconf`
 
 ## Deploy Kubernetes
