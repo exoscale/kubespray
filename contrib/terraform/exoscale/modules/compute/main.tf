@@ -63,6 +63,15 @@ resource "exoscale_security_group_rule" "k8s_udp" {
   protocol = "UDP"
 }
 
+resource "exoscale_security_group_rule" "k8s_ssh" {
+  security_group_id = "${exoscale_security_group.k8s.id}"
+  cidr = "0.0.0.0/0"
+  type = "INGRESS"
+  protocol = "TCP"
+  start_port = 22
+  end_port = 22
+}
+
 resource "exoscale_compute" "bastion" {
   count = "${var.number_of_bastions}"
   display_name = "${var.cluster_name}-bastion-${count.index+1}"
@@ -135,6 +144,16 @@ resource "exoscale_compute" "etcd" {
   tags {
     kubespray_groups = "etcd,vault"
   }
+
+  user_data = <<EOF
+#cloud-config
+
+package_udpate: true
+package_upgrade: true
+
+packages:
+- python-pip
+EOF
 }
 
 resource "exoscale_compute" "k8s_node" {

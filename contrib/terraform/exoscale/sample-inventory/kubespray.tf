@@ -33,7 +33,7 @@ variable "public_key_path" {
 
 variable "template" {
   description = "the image to use"
-  default = "Linux Ubuntu 17.10 64-bit"
+  default = "Linux Ubuntu 16.04 LTS 64-bit"
 }
 
 variable "zone" {

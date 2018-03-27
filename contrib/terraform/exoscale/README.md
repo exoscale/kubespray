@@ -150,10 +150,6 @@ Edit `inventory/$CLUSTER/group_vars/all.yml`.
 
 - `boostrap_os`: `ubuntu`
 
-Edit `inventory/$CLUSTER/group_vars/k8s-cluster.yml`:
-
-- `resolvconf_mode`: `host_resolvconf`
-
 ## Deploy Kubernetes
 
 ```console
