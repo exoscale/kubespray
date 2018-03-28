@@ -121,7 +121,7 @@ $ ssh-add ~/.ssh/id_rsa
 
 ### Ping
 
-Make sure you can connect to the hosts.
+Make sure you can connect to the hosts. As CoreOS doesn't have any Python, this will fail.
 
 ```console
 $ ansible -i hosts -m ping all
@@ -148,7 +148,7 @@ example-k8s-master-ne-1 | SUCCESS => {
 
 Edit `inventory/$CLUSTER/group_vars/all.yml`.
 
-- `boostrap_os`: `ubuntu`
+- `boostrap_os`: `coreos`
 
 ## Deploy Kubernetes
 

@@ -144,16 +144,6 @@ resource "exoscale_compute" "etcd" {
   tags {
     kubespray_groups = "etcd,vault"
   }
-
-  user_data = <<EOF
-#cloud-config
-
-package_udpate: true
-package_upgrade: true
-
-packages:
-- python-pip
-EOF
 }
 
 resource "exoscale_compute" "k8s_node" {

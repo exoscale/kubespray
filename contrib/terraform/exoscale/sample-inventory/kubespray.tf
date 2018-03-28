@@ -1,5 +1,5 @@
 provider "exoscale" {
-  version = "~> 0.9.14"
+  version = "~> 0.9.17"
 }
 
 variable "cluster_name" {
@@ -33,7 +33,7 @@ variable "public_key_path" {
 
 variable "template" {
   description = "the image to use"
-  default = "Linux Ubuntu 16.04 LTS 64-bit"
+  default = "Linux CoreOS 1576 64-bit"
 }
 
 variable "zone" {
